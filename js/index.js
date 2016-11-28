@@ -37,7 +37,7 @@ function handleFileSelect(evt) {
           console.log(e.target.result);
 
           var uri = e.target.result;
-          var body = '<a> <b> <c> .';
+          var body = '<a> <b> <c>.';
           var mimeType = 'text/turtle';
           var store = $rdf.graph();
 
@@ -47,10 +47,12 @@ function handleFileSelect(evt) {
               console.log(err);
           }
 
+          console.log(store);
+
         };
       })(myFile);
 
-    reader.readAsDataURL(myFile);
+    reader.readAsText(myFile);
 
   }
 
