@@ -21,6 +21,8 @@ $(function() {
               if( log ) alert(log);
           }
 
+          console.log(input);
+
       });
   });
   
