@@ -1,0 +1,22 @@
+{
+  "name": "graph",
+  "version": "1.0.0",
+  "description": "Trabajo Practico Especial de Web Semantica",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/florbest89/graph.git"
+  },
+  "author": "Maximiliano J. Valverde y Ma. Florencia Besteiro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/florbest89/graph/issues"
+  },
+  "homepage": "https://github.com/florbest89/graph#readme",
+  "dependencies": {
+    "rdflib": "^0.12.1"
+  }
+}
