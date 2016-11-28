@@ -1,0 +1,19 @@
+@prefix lib: <http://www.lib.org/schema#>
+@prefix : <http://www.bremen-lib.org/>
+
+:library lib:location "Bremen".
+:jlb lib:name "Jorge Luis Borges".
+:b1 lib:author :jlb;
+	lib:title "Labyrinths".
+:b2 lib:author :jlb;
+	lib:title "Doctor Brodie's Report".
+:b3 lib:author :jlb;
+	lib:title "The Garden of Forking Paths".
+:abc lib:name "Adolfo Bioy Casares".
+:b4 lib:author :abc;
+	lib:title "The Invention of Morel".
+:jc lib:name "Julio Cortázar".
+:b5 lib:author :jc;
+	lib:title "Bestiario".
+:b6 lib:author :jc;
+	lib:title "Un tal Lucas".
