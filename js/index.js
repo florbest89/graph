@@ -1,29 +1,41 @@
-$(function() {
+// Check for the various File API support.
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+  // Great success! All the File APIs are supported.
+} else {
+  alert('The File APIs are not fully supported in this browser.');
+}
 
-  // We can attach the `fileselect` event to all file inputs on the page
-  $(document).on('change', ':file', function() {
-    var input = $(this),
-        numFiles = input.get(0).files ? input.get(0).files.length : 1,
-        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-    input.trigger('fileselect', [numFiles, label]);
-  });
+function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
 
-  // We can watch for our custom `fileselect` event like this
-  $(document).ready( function() {
-      $(':file').on('fileselect', function(event, numFiles, label) {
+    // files is a FileList of File objects. List some properties.
 
-          var input = $(this).parents('.input-group').find(':text'),
-              log = numFiles > 1 ? numFiles + ' files selected' : label;
+    var output = [];
 
-          if( input.length ) {
-              input.val(log);
-          } else {
-              if( log ) alert(log);
-          }
+    for (var i = 0, f; f = files[i]; i++) {
+      output.push(escape(f.name), ' (', f.type || 'n/a', ') - ',
+                  f.size, ' bytes, last modified: ',
+                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a');
+    }
 
-          console.log(input);
+    var input = $(this).parents('.input-group').find(':text');
+    input.val(output.join(''));
 
-      });
-  });
-  
-});
+    var myFile = files[0];
+
+    var reader = new FileReader();
+
+    // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+
+          console.log(e.target.result);
+
+        };
+      })(myFile);
+
+    reader.readAsDataURL(myFile);
+
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);

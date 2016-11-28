@@ -46,13 +46,14 @@
 		                <label class="input-group-btn">
 		                    <span class="btn btn-primary">
 		                        Browse&hellip;
-		                        <input type="file" accept=".ttl, .xml, text/turtle, text/xml" style="display: none;">
+		                        <input 	type="file" id="files" name="file" 
+		                        		accept=".ttl, .xml, text/turtle, text/xml" style="display: none;">
 		                    </span>
 		                </label>
-		                <input type="text" class="form-control" readonly>
+		                <input type="text" id="info" class="form-control" readonly>
 		            </div>
 		            <span class="help-block">
-		                Supported Media Types: Text/Turtle, Text/XML
+		                Supported Media Types: Text/Turtle (.TTL), Text/XML (.XML)
 		            </span>
 		        </div>	   
 		    </div>
