@@ -6,9 +6,8 @@ var svg = d3.select("#graph").append("svg")
     .attr("height", height);
 
 var force = d3.layout.force()
-    .gravity(0)
+    .charge(-500)
     .distance(100)
-    .charge(-5)
     .size([width, height]);
 
 
