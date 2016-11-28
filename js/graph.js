@@ -13,9 +13,9 @@ var force = d3.layout.force()
 
 var json = {
   "nodes":[
-    {"name":"Juan","type":1},
-    {"name":"es un","type":2},
-    {"name":"hombre","type":3}
+    {"name":"Juan","type":1,"prefix":"s:"},
+    {"name":"es un","type":2,"prefix":"p:"},
+    {"name":"hombre","type":3,"prefix":"o:"}
   ],
   "links":[
     {"source":0,"target":1,"weight":1},
@@ -42,29 +42,12 @@ var json = {
       .call(force.drag);
 
   node.append("circle")
-      .attr("r",function(node){
-        if(node.type == 2){
-          return 5;
-        }
-
-        return 10;
-      });
+      .attr("r",function(node){ return node.type == 2? 5: 10; });
 
   node.append("text")
       .attr("dx", 12)
       .attr("dy", ".35em")
-      .text(function(node) { 
-
-        var text = ""
-        switch(node.type){
-          case 1: text = text + "s: "; break;
-          case 2: text = text + "p: "; break;
-          case 3: text = text + "o: "; break;
-        }
-
-        return text + node.name;
-
-      });
+      .text(function(node) { return node.prefix + " " + node.name; });
 
   force.on("tick", function() {
     link.attr("x1", function(d) { return d.source.x; })
