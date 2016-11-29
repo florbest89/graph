@@ -36,18 +36,14 @@ function handleFileSelect(evt) {
 
           console.log(e.target.result);
 
-          var uri = e.target.result;
-          var body = '<a> <b> <c>.';
-          var mimeType = 'text/turtle';
-          var store = $rdf.graph();
-
-          try {
-            $rdf.parse(body, store, uri, mimeType);
-          } catch (err) {
-              console.log(err);
-          }
-
-          console.log(store);
+          var parser = N3.Parser();
+          parser.parse(e.target.result,function(error,triple,prefixes){
+            debugger
+            if (triple)
+                 console.log(triple.subject, triple.predicate, triple.object, '.');
+               else
+                 console.log("# That's all, folks!", prefixes);
+          });
 
         };
       })(myFile);
