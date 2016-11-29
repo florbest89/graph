@@ -1,5 +1,30 @@
-var width = 960,
-    height = 500
+function draw(triples, sub_obs, nodes, id){
+
+
+  console.log("#Triples : " + triples.length);
+  console.log("Id: " + id);
+
+  var links = [];
+
+   for(i = 0 ; i < triples.length ; i++){
+
+    var triple = triples[i];
+
+    var node = {"name": triple.predicate , "type": 2};
+    nodes.push(node);
+
+    var link_sp = {"source": sub_obs[triple.subject], "target": id, "weight": 1};
+    links.push(link_sp);
+
+    var link_po = {"source": id, "target": sub_obs[triple.object], "weight": 1};
+    links.push(link_po);
+
+    id += 1;
+
+  }
+
+var width = 1000,
+    height = 1000;
 
 var svg = d3.select("#graph").append("svg")
     .attr("width", width)
@@ -12,15 +37,8 @@ var force = d3.layout.force()
 
 
 var json = {
-  "nodes":[
-    {"name":"Juan","type":1,"prefix":"s:"},
-    {"name":"es un","type":2,"prefix":"p:"},
-    {"name":"hombre","type":3,"prefix":"o:"}
-  ],
-  "links":[
-    {"source":0,"target":1,"weight":1},
-    {"source":1,"target":2,"weight":1}
-  ]
+  "nodes": nodes,
+  "links": links
 };
 
 
@@ -47,7 +65,7 @@ var json = {
   node.append("text")
       .attr("dx", 12)
       .attr("dy", ".35em")
-      .text(function(node) { return node.prefix + " " + node.name; });
+      .text(function(node) { return node.name; });
 
   force.on("tick", function() {
     link.attr("x1", function(d) { return d.source.x; })
@@ -57,3 +75,7 @@ var json = {
 
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 });
+
+}
+
+

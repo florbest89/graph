@@ -34,15 +34,42 @@ function handleFileSelect(evt) {
       reader.onload = (function(theFile) {
         return function(e) {
 
-          console.log(e.target.result);
+          //console.log(e.target.result);
+
+          var triples = [];
+          var sub_obs = {};
+          var nodes = [];
+          var id = 0;
 
           var parser = N3.Parser();
+          
           parser.parse(e.target.result,function(error, triple, prefixes){
             
-            //debugger;
             if (triple) { 
+
+              triples.push(triple);
+
+              if( sub_obs[triple.subject] == undefined){
+              		var node = {"name": triple.subject, "type": 1};
+              		sub_obs[triple.subject] = id;
+              		id += 1;
+              		nodes.push(node);
+              }
+
+              if (sub_obs[triple.object] == undefined){
+              		var node = {"name": triple.object, "type": 1};
+              		sub_obs[triple.object] = id;
+              		id += 1;
+              		nodes.push(node);
+              }
+
               console.log(triple.subject, triple.predicate, triple.object, '.');
             }else{
+
+              if(triples.length > 0){
+              	draw(triples,sub_obs,nodes,id);
+              }
+
               console.log("# That's all, folks!", prefixes || '');
               
               if (error)
@@ -55,6 +82,7 @@ function handleFileSelect(evt) {
       })(myFile);
 
     reader.readAsText(myFile);
+
 
   }
 
