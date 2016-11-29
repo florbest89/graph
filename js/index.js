@@ -37,12 +37,18 @@ function handleFileSelect(evt) {
           console.log(e.target.result);
 
           var parser = N3.Parser();
-          parser.parse(e.target.result,function(error,triple,prefixes){
-            debugger
-            if (triple)
-                 console.log(triple.subject, triple.predicate, triple.object, '.');
-               else
-                 console.log("# That's all, folks!", prefixes);
+          parser.parse(e.target.result,function(error, triple, prefixes){
+            
+            //debugger;
+            if (triple) { 
+              console.log(triple.subject, triple.predicate, triple.object, '.');
+            }else{
+              console.log("# That's all, folks!", prefixes || '');
+              
+              if (error)
+                console.log("#", error);
+            }
+
           });
 
         };
