@@ -5,11 +5,6 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
   alert('The File APIs are not fully supported in this browser.');
 }
 
-//var RDF = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-//var RDFS = Namespace("http://www.w3.org/2000/01/rdf-schema#");
-//var FOAF = Namespace("http://xmlns.com/foaf/0.1/");
-//var XSD = Namespace("http://www.w3.org/2001/XMLSchema#");
-
 function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
 
@@ -33,8 +28,6 @@ function handleFileSelect(evt) {
     // Closure to capture the file information.
       reader.onload = (function(theFile) {
         return function(e) {
-
-          //console.log(e.target.result);
 
           var triples = [];
           var sub_obs = {};

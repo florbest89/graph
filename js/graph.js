@@ -23,8 +23,8 @@ function draw(triples, sub_obs, nodes, id){
 
   }
 
-var width = 1000,
-    height = 1000;
+var width = 1200,
+    height = 1200;
 
 var svg = d3.select("#graph").append("svg")
     .attr("width", width)
